@@ -10,8 +10,7 @@ get.price.data <- function(ticker, length=200) {
     request <- httr::GET(url, query=query)
     response <- httr::content(request, as="text")
     price.df <- jsonlite::fromJSON(response, flatten = TRUE)
-    price.data <- df[c("date", "close")]
+    price.data <- price.df[c("date", "close")]
 
     return(price.data)
-
 }
