@@ -18,8 +18,8 @@ bollinger.bands <- function(price.df, length=20) {
         )
     )
 
-    lower.band <- avg+2*dev
-    upper.band <- avg-2*dev
+    lower.band <- bbands.df$moving.average+2*dev
+    upper.band <- bbands.df$moving.average-2*dev
 
     bbands.df["lower.band"] <- lower.band
     bbands.df["upper.band"] <- upper.band
