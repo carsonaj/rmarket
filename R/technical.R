@@ -13,11 +13,11 @@ moving.average <- function(price.df, length=20) {
 
 bollinger.bands <- function(price.df, length=20) {
     bbands.df <- moving.average(price.df, length)
-    dev <- as.numeric(
+    var <- sqrt(as.numeric(
         stats::filter(
             (price.df$close - bbands.df$moving.average)^2, rep(1/(length-1), length), sides = 1
         )
-    )
+    ))
 
     lower.band <- bbands.df$moving.average+2*dev
     upper.band <- bbands.df$moving.average-2*dev
@@ -29,7 +29,7 @@ bollinger.bands <- function(price.df, length=20) {
 }
 
 bollinger.bands.plot <- function(bbands.df) {
-    ggplot() +
+    ggplot2::ggplot() +
     geom_line(data=bbands.df[c("date", "close")], aes(x=date, y=close), color="black") +
     geom_line(data=bbands.df[c("date", "moving.average")], aes(x=date, y=moving.average), color="red") +
     geom_line(data=bbands.df[c("date", "upper.band")], aes(x=date, y=upper.band), color="red", linetype="dashed") +
