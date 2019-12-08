@@ -11,6 +11,7 @@ get.price.data <- function(ticker, length=200) {
     response <- httr::content(request, as="text")
     price.df <- jsonlite::fromJSON(response, flatten = TRUE)
     price.data <- price.df[c("date", "close")]
+    price.data$date <- as.Date(price.data$date, format = "%Y-%m-%d")
 
     return(price.data)
 }
