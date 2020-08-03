@@ -15,7 +15,8 @@ bollinger.bands <- function(price.df, length=20) {
     bbands.df <- moving.average(price.df, length)
     dev <- sqrt(as.numeric(
         stats::filter(
-            (price.df$close - bbands.df$moving.average)^2, rep(1/(length-1), length), sides = 1
+            (price.df$close - bbands.df$moving.average)^2, 
+            rep(1/(length-1), length), sides = 1
         )
     ))
 
